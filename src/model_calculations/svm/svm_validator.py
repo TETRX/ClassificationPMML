@@ -15,14 +15,19 @@ class SVMValidator(Validator):
         best_kernel=0
         for C in self.Cs:
             for kernel_func in self.kernel_funcs:
-                trainer=SVMTrainer(kernel_func,C,self.optimizer)
-                total_evaluation=0
-                for training_dataset,validating_dataset in training_validating_datasets:
-                    model=trainer.train(training_dataset)
-                    total_evaluation+=model.evaluate(validating_dataset)
-                total_evaluation/=len(training_validating_datasets)
-                if total_evaluation<best_eval:
-                    best_eval=total_evaluation
-                    best_C=C
-                    best_kernel=kernel_func
+                try:
+                    trainer=SVMTrainer(kernel_func,C,self.optimizer)
+                    total_evaluation=0
+                    for training_dataset,validating_dataset in training_validating_datasets:
+                        model=trainer.train(training_dataset)
+                        total_evaluation+=model.evaluate(validating_dataset)
+                    total_evaluation/=len(training_validating_datasets)
+                    if total_evaluation<best_eval:
+                        best_eval=total_evaluation
+                        best_C=C
+                        best_kernel=kernel_func
+                    print("C:",C)
+                    print("eval:", total_evaluation)
+                except:
+                    continue
         return SVMTrainer(best_kernel,best_C,self.optimizer)

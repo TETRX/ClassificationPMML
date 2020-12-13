@@ -13,5 +13,6 @@ class DataReader:
         file = open(self.path_to_file, 'r') 
         lines = file.readlines()
         for line in lines:
-            num_lines.append([float(num) for num in line.split()])
+            num_lines.append([int(num) for num in filter(None,line.split(","))])
+        # print(num_lines)
         return Dataset(num_lines)
