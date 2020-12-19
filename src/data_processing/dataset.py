@@ -5,7 +5,10 @@ class Dataset:
     def __init__(self, data_lines):
         self.matrix=matrix(data_lines)
         self.x=len(data_lines)
-        self.y=len(data_lines[0])
+        if self.x!=0:
+            self.y=len(data_lines[0])
+        else:
+            self.y=0
 
     def apply_functions(self, functions):
         new_lines=[]
@@ -26,6 +29,8 @@ class Dataset:
         return self.matrix.tolist()
 
     def get_X_y(self):
+        if self.x==0:
+            return ([],[])
         lists=self.matrix.tolist()
         X=[]
         y=[]

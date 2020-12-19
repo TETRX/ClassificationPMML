@@ -8,7 +8,7 @@ class SVMTrainer(Trainer):
         self.C=C
         self.optimizer=optimizer
 
-    def train(self,training_dataset):
+    def train(self,training_dataset,validation_dataset=None):
         X,y=training_dataset.get_X_y()
         alphas=self.optimizer.optimize(X,y,self.C,self.kernel_func)
         w=[0 for i in range(len(X[0]))]

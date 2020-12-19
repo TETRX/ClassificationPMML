@@ -6,6 +6,7 @@ from ..data_processing.data_divider import DataDivider
 from ..model_calculations.svm.kernel_funcs.dot_product import DotProduct
 from ..model_calculations.svm.svm_validator import SVMValidator
 from ..model_calculations.svm.sequential_optimizer import SequentialOptimizer
+from ..model_calculations.svm.kernel_funcs.polynomial_kernel import PolynomialKernel
 
 data_reader=DataReader("data/phishing.data")
 dataset=data_reader.read()
@@ -14,8 +15,8 @@ training_dataset, validation_dataset, test_dataset= data_divider.divide([0.3,0.3
 training_validating_datasets=[(training_dataset,validation_dataset)]
 
 
-Cs=[100,1000,5000]
-kernel_funcs=[DotProduct()]
+Cs=[5000]
+kernel_funcs=[DotProduct(),PolynomialKernel(10)]
 optimizer=SequentialOptimizer()
 
 validator=SVMValidator(Cs,kernel_funcs,optimizer)
