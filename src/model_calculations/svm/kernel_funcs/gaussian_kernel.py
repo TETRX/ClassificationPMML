@@ -8,3 +8,6 @@ class GaussianKernel(KernelFunc):
 
     def compute(self, v, u):
         return math.exp(sum((i[0]-i[1])**2 for i in zip(v, u))/(2*self.tau**2))
+    
+    def to_string(self):
+        return "gaussian with "+ self.tau

@@ -26,8 +26,10 @@ class SequentialOptimizer(Optimizer):
                 alphas.append((pos_counter/m)*C/m)
             else:
                 alphas.append((neg_counter/m)*C/m)
-        print(alphas)
-        for _ in range(m):
+        # print(alphas)
+        print(m)
+        for counter in range(m):
+            print(counter)
             # print("---------")
             i,j=self.take_two(m)
             # print("ys",y[i],y[j])
@@ -72,5 +74,5 @@ class SequentialOptimizer(Optimizer):
             alphas[i]=constrained_minimum
             alphas[j]=y[j]*(zeta-constrained_minimum*y[i])
             # print(alphas)
-        print(alphas)
+        # print(alphas)
         return alphas

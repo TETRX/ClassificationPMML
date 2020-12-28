@@ -27,6 +27,7 @@ class SVMValidator(Validator):
                         best_C=C
                         best_kernel=kernel_func
                     print("C:",C)
+                    print("kernel:", kernel_func.to_string())
                     print("eval:", total_evaluation)
                 except:
                     continue

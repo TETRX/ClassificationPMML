@@ -8,3 +8,6 @@ class PolynomialKernel(KernelFunc):
 
     def compute(self, v, u):
         return (sum(i[0] * i[1] for i in zip(v, u))+1)**self.p
+
+    def to_string(self):
+        return "polynomial with deg: "+self.p

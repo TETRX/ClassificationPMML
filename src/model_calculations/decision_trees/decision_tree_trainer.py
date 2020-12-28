@@ -22,10 +22,12 @@ class DecisionTreeTrainer(Trainer):
         size=tree.size()
         best_rate=tree.evaluate(val_dataset)+self.alpha*size
         for i in range(len(prunes)):
-            rate=tree.evaluate(val_dataset)+self.alpha*(size-i)
-            print(i)
-            print(rate)
-            if rate>best_rate:
+            cost=1-tree.evaluate(val_dataset)
+            reg=self.alpha*(size-i)
+            # print("eval:",eval)
+            # print("reg:",reg)
+            rate=cost+reg
+            if rate<best_rate:
                 best_rate=rate
                 best_time=i
             prunes[i].set_prune(True)

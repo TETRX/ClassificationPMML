@@ -16,10 +16,9 @@ class DecisionTreeValidator(Validator):
             total_evaluation=0
             for training_dataset,validating_dataset in training_validating_datasets:
                 model=trainer.train(training_dataset,validation_dataset=validating_dataset)
-                print(model.size())
                 total_evaluation+=model.evaluate(validating_dataset)
             total_evaluation/=len(training_validating_datasets)
-            if total_evaluation<best_eval:
+            if total_evaluation>best_eval:
                 best_eval=total_evaluation
                 best_alpha=alpha
             print("alpha:",alpha)

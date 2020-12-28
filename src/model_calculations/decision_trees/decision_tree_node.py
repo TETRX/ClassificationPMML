@@ -27,7 +27,6 @@ class DecisionTreeNode(Model):
         counter=[[0,0],[0,0],[0,0]]
         for i in range(len(self.X)):
             counter[self.X[i][attribute]+1][1 if self.y[i]==-1 else 0]+=1
-        print(counter)
         makes_sense=False
         for comparison in counter:
             if comparison[(self.ret+1)//2]<comparison[(-self.ret+1)//2]: #check if at least one entry has been reclassified
