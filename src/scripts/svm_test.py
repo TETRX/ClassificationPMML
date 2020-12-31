@@ -6,16 +6,16 @@ from ..data_processing.data_divider import DataDivider
 
 from ..model_calculations.svm.kernel_funcs.dot_product import DotProduct
 from ..model_calculations.svm.svm_validator import SVMValidator
-from ..model_calculations.svm.sequential_optimizer import SequentialOptimizer
 from ..model_calculations.svm.kernel_funcs.polynomial_kernel import PolynomialKernel
 
 
 from ..result_processing.result_getter import ResultGetter
 from ..result_processing.csv_result_saver import CSVResultSaver
 
-PATH_TO_RESULTS="results/svm_dot_prod.csv"
+# PATH_TO_RESULTS="results/svm_dot_prod.csv"
 # PATH_TO_RESULTS="results/svm_polynomials.csv"
-# PATH_TO_RESULTS="results/svm_gaussians.csv"
+PATH_TO_RESULTS="results/svm_gaussians.csv"
+# PATH_TO_RESULTS="results/test.csv"
 
 NUM_OF_DIVS=5
 
@@ -27,16 +27,15 @@ training_validating_datasets=[(div[0],div[1]) for div in divisions]
 
 
 
-Cs=[100,1000,5000,10000,20000]
+Cs=[10000]
 
-kernel_funcs=[DotProduct()]
-# kernel_funcs=[PolynomialKernel(i+1) for i in range(10)]
-# ds=[0.001,0.01,0.1,1.0,10.0]
-# kernel_funcs=[GaussianKernel(d) for d in ds]
+# kernel_funcs=[DotProduct()]
+# kernel_funcs=[PolynomialKernel(i+2) for i in range(4)]
+taus=[1.0]
+kernel_funcs=[GaussianKernel(tau) for tau in taus]
 
-optimizer=SequentialOptimizer()
 
-validator=SVMValidator(Cs,kernel_funcs,optimizer)
+validator=SVMValidator(Cs,kernel_funcs)
 
 trainer=validator.get_trainer(training_validating_datasets)
 average_eval=0

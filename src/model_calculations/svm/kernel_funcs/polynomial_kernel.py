@@ -1,5 +1,5 @@
 from ..a_kernel_func import KernelFunc
-import math
+import numpy as np
 
 class PolynomialKernel(KernelFunc):
     def __init__(self, p):
@@ -7,7 +7,7 @@ class PolynomialKernel(KernelFunc):
         self.p=p
 
     def compute(self, v, u):
-        return (sum(i[0] * i[1] for i in zip(v, u))+1)**self.p
+        return (np.dot(v,u.T)+1)**self.p
 
     def to_string(self):
-        return "polynomial with deg: "+self.p
+        return "polynomial with deg: "+str(self.p)
