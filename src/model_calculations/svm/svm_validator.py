@@ -16,12 +16,10 @@ class SVMValidator(Validator):
             for kernel_func in self.kernel_funcs:
                 trainer=SVMTrainer(kernel_func,C)
                 total_evaluation=0
-                try:
-                    for training_dataset,validating_dataset in training_validating_datasets:
-                        model=trainer.train(training_dataset)
-                        total_evaluation+=model.evaluate(validating_dataset)
-                except OverflowError:
-                    continue
+                for training_dataset,validating_dataset in training_validating_datasets:
+                    model=trainer.train(training_dataset)
+                    total_evaluation+=model.evaluate(validating_dataset)
+                
                 total_evaluation/=len(training_validating_datasets)
                 if total_evaluation<best_eval:
                     best_eval=total_evaluation

@@ -6,6 +6,9 @@ class PolynomialKernel(KernelFunc):
         super().__init__()
         self.p=p
 
+    def compute_gram(self, el):
+        return self.compute(el,el)
+
     def compute(self, v, u):
         return (np.dot(v,u.T)+1)**self.p
 

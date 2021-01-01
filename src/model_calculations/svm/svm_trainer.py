@@ -38,8 +38,10 @@ class SVMTrainer(Trainer):
                 alphas.append((neg_counter/(m))*self.C/m)
         alphas=np.array(alphas)
 
-        K=self.kernel_func.compute(X,X)*y[:,np.newaxis]*y
+        K=self.kernel_func.compute_gram(X)*y[:,np.newaxis]*y
+        # print(K)
         for _ in range(SVMTrainer.ITERATIONS):
+            # print(_)
             for i in range(len(alphas)):
                 j=np.random.randint(0,len(alphas))
                 while j==i:

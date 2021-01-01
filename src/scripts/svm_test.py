@@ -13,8 +13,8 @@ from ..result_processing.result_getter import ResultGetter
 from ..result_processing.csv_result_saver import CSVResultSaver
 
 # PATH_TO_RESULTS="results/svm_dot_prod.csv"
-# PATH_TO_RESULTS="results/svm_polynomials.csv"
-PATH_TO_RESULTS="results/svm_gaussians.csv"
+PATH_TO_RESULTS="results/svm_polynomials2.csv"
+# PATH_TO_RESULTS="results/svm_gaussians.csv"
 # PATH_TO_RESULTS="results/test.csv"
 
 NUM_OF_DIVS=5
@@ -27,12 +27,12 @@ training_validating_datasets=[(div[0],div[1]) for div in divisions]
 
 
 
-Cs=[10000]
+Cs=[100,1000]
 
 # kernel_funcs=[DotProduct()]
-# kernel_funcs=[PolynomialKernel(i+2) for i in range(4)]
-taus=[1.0]
-kernel_funcs=[GaussianKernel(tau) for tau in taus]
+kernel_funcs=[PolynomialKernel(i+3) for i in range(3)]
+# taus=[0.01,0.2,0.1,0.5]
+# kernel_funcs=[GaussianKernel(tau) for tau in taus]
 
 
 validator=SVMValidator(Cs,kernel_funcs)
